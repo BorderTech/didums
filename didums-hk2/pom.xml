@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<name>didums-hk2</name>
+	<artifactId>didums-hk2</artifactId>
+
+	<parent>
+		<groupId>com.github.bordertech.didums</groupId>
+		<artifactId>didums</artifactId>
+		<version>1.0.0-SNAPSHOT</version>
+	</parent>
+
+	<packaging>jar</packaging>
+
+	<properties>
+		<bt.qa.skip>false</bt.qa.skip>
+	</properties>
+
+	<dependencies>
+		<dependency>
+			<groupId>com.github.bordertech.didums</groupId>
+			<artifactId>didums-core</artifactId>
+			<version>1.0.0-SNAPSHOT</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.glassfish.hk2</groupId>
+			<artifactId>hk2</artifactId>
+			<version>2.5.0-b32</version>
+		</dependency>
+	</dependencies>
+</project>

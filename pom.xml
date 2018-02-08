@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>com.github.bordertech.didums</groupId>
+	<name>didums</name>
+	<artifactId>didums</artifactId>
+	<version>1.0.0-SNAPSHOT</version>
+
+	<parent>
+		<groupId>com.github.bordertech.common</groupId>
+		<artifactId>qa-parent</artifactId>
+		<version>1.0.4</version>
+	</parent>
+
+	<packaging>pom</packaging>
+
+	<properties>
+		<bt.qa.skip>true</bt.qa.skip>
+	</properties>
+
+	<description>
+		Didums makes use of JSR330 annotations and requires a provider like HK2 or Guice to provide the injection
+		functionality. A `DidumsProvider` is the interface between the Didums API and the Provider's API.
+	</description>
+
+	<url>https://github.com/bordertech/didums</url>
+
+	<scm>
+		<url>https://github.com/bordertech/didums</url>
+		<connection>scm:git:https://github.com/bordertech/didums.git</connection>
+		<developerConnection>scm:git:https://github.com/bordertech/didums.git</developerConnection>
+		<tag>didums-1.0.0</tag>
+	</scm>
+
+	<issueManagement>
+		<system>GitHub</system>
+		<url>https://github.com/bordertech/didums/issues</url>
+	</issueManagement>
+
+	<ciManagement>
+		<system>CircleCI</system>
+		<url>https://circleci.com/gh/bordertech/didums/</url>
+	</ciManagement>
+
+	<dependencies>
+		<!-- Configuration properties. -->
+		<dependency>
+			<groupId>commons-configuration</groupId>
+			<artifactId>commons-configuration</artifactId>
+			<version>1.10</version>
+		</dependency>
+		<!-- Commons config brings in servlet.api -->
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>servlet-api</artifactId>
+			<version>2.5</version>
+			<scope>provided</scope>
+		</dependency>
+	</dependencies>
+
+	<modules>
+		<module>didums-core</module>
+		<module>didums-hk2</module>
+	</modules>
+</project>
