@@ -5,7 +5,7 @@
 	<groupId>com.github.bordertech.didums</groupId>
 	<name>didums</name>
 	<artifactId>didums</artifactId>
-	<version>1.0.0-SNAPSHOT</version>
+	<version>1.0.1-SNAPSHOT</version>
 
 	<parent>
 		<groupId>com.github.bordertech.common</groupId>
