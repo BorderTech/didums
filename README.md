@@ -1,6 +1,16 @@
 # Didums
 Dependency Injection based on JSR330.
 
+## Status
+
+[![CircleCI](https://circleci.com/gh/BorderTech/didums.svg?style=svg)](https://circleci.com/gh/BorderTech/didums)
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/60fbedbceee84805a244d89182a41310)](https://www.codacy.com/app/BorderTech/didums?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=BorderTech/didums&amp;utm_campaign=Badge_Grade)
+
+## Why Use Didums?
+TODO
+
+## How Didums Works
+
 Didums makes use of the jsr330 annotations and requires a provider like HK2 or Guice to provide the injection
 functionality. A `DidumsProvider` is the interface between the Didums API and the Provider's API.
 
