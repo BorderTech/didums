@@ -8,7 +8,7 @@
 	<parent>
 		<groupId>com.github.bordertech.didums</groupId>
 		<artifactId>didums</artifactId>
-		<version>1.0.0</version>
+		<version>1.0.1-SNAPSHOT</version>
 	</parent>
 
 	<packaging>jar</packaging>
@@ -21,7 +21,7 @@
 		<dependency>
 			<groupId>com.github.bordertech.didums</groupId>
 			<artifactId>didums-core</artifactId>
-			<version>1.0.0</version>
+			<version>1.0.1-SNAPSHOT</version>
 		</dependency>
 
 		<dependency>
