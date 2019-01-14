@@ -1,5 +1,6 @@
 package com.github.bordertech.didums;
 
+import com.github.bordertech.config.Config;
 import java.lang.annotation.Annotation;
 import java.util.List;
 
@@ -26,6 +27,8 @@ import java.util.List;
  * Note: Multiple DidumsBinder implementations can be set.
  * </p>
  *
+ * @see Config
+ * @see Factory
  *
  * @author Jonathan Austin
  * @since 1.0.0

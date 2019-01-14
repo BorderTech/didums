@@ -28,8 +28,12 @@ import org.apache.commons.logging.LogFactory;
  * Factory also supports the Singleton annotation to make sure only one instance of a requested class is created.
  * </p>
  *
+ * @see Config
+ * @see Didums
+ *
  * @author Jonathan Austin
  * @since 1.0.0
+ *
  */
 public final class Factory {
 
