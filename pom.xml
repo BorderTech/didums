@@ -10,13 +10,13 @@
 	<parent>
 		<groupId>com.github.bordertech.common</groupId>
 		<artifactId>qa-parent</artifactId>
-		<version>1.0.4</version>
+		<version>1.0.10</version>
 	</parent>
 
 	<packaging>pom</packaging>
 
 	<properties>
-		<bt.qa.skip>true</bt.qa.skip>
+		<bt.qa.skip>false</bt.qa.skip>
 	</properties>
 
 	<description>
@@ -39,25 +39,28 @@
 	</issueManagement>
 
 	<ciManagement>
-		<system>CircleCI</system>
-		<url>https://circleci.com/gh/bordertech/didums/</url>
+		<system>Travis CI</system>
+		<url>https://travis-ci.com/BorderTech/didums</url>
 	</ciManagement>
 
-	<dependencies>
-		<!-- Configuration properties. -->
-		<dependency>
-			<groupId>commons-configuration</groupId>
-			<artifactId>commons-configuration</artifactId>
-			<version>1.10</version>
-		</dependency>
-		<!-- Commons config brings in servlet.api -->
-		<dependency>
-			<groupId>javax.servlet</groupId>
-			<artifactId>servlet-api</artifactId>
-			<version>2.5</version>
-			<scope>provided</scope>
-		</dependency>
-	</dependencies>
+	<dependencyManagement>
+		<dependencies>
+
+			<!-- Config -->
+			<dependency>
+				<groupId>com.github.bordertech.config</groupId>
+				<artifactId>config</artifactId>
+				<version>1.0.1</version>
+			</dependency>
+
+			<!-- Injection interface. JSR 330 -->
+			<dependency>
+				<groupId>javax.inject</groupId>
+				<artifactId>javax.inject</artifactId>
+				<version>1</version>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
 
 	<modules>
 		<module>didums-core</module>

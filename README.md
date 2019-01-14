@@ -2,9 +2,10 @@
 Dependency Injection based on JSR330.
 
 ## Status
-
-[![CircleCI](https://circleci.com/gh/BorderTech/didums.svg?style=svg)](https://circleci.com/gh/BorderTech/didums)
+[![Build Status](https://travis-ci.com/BorderTech/didums.svg?branch=master)](https://travis-ci.com/BorderTech/didums)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/60fbedbceee84805a244d89182a41310)](https://www.codacy.com/app/BorderTech/didums?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=BorderTech/didums&amp;utm_campaign=Badge_Grade)
+[![Javadocs](https://www.javadoc.io/badge/com.github.bordertech.didums/didums-core.svg)](https://www.javadoc.io/doc/com.github.bordertech.didums/didums-core)
+[![Maven Central](https://img.shields.io/maven-central/v/com.github.bordertech.didums/didums-core.svg?label=Maven%20Central)](https://search.maven.org/search?q=g:%22com.github.bordertech.didums%22%20AND%20a:%22didums-core%22)
 
 ## Why Use Didums?
 TODO
