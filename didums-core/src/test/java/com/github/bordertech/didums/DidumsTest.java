@@ -1,6 +1,7 @@
 package com.github.bordertech.didums;
 
 import com.github.bordertech.config.Config;
+import java.lang.annotation.Annotation;
 import junit.framework.Assert;
 import org.junit.After;
 import org.junit.Test;
@@ -12,6 +13,8 @@ public class DidumsTest {
 
 	private static final String PREFIX = "bordertech.factory.impl.";
 
+	private static final TestAnnotatation QUALIFIER = new TestAnnotatation();
+
 	@After
 	public void restoreConfig() {
 		Config.reset();
@@ -21,11 +24,9 @@ public class DidumsTest {
 	public void testImplementationExists() {
 		// Should not exist
 		Assert.assertFalse("No implementation should exist", Didums.hasService(TestDidumsInterface.class));
-
 		// Setup property
 		final String key = PREFIX + TestDidumsInterface.class.getName();
 		Config.getInstance().setProperty(key, TestDidumsInterfaceImpl.class.getName());
-
 		// Should exist
 		Assert.assertTrue("An implementation should exist", Didums.hasService(TestDidumsInterface.class));
 	}
@@ -38,8 +39,32 @@ public class DidumsTest {
 	@Test
 	public void testNewInstanceWithImpl() {
 		Config.getInstance().setProperty(PREFIX + TestDidumsInterface.class.getName(), TestDidumsInterfaceImpl.class.getName());
-		Assert.assertTrue("Should be an instanceof TestInterface", Didums.getService(
-				TestDidumsInterface.class) instanceof TestDidumsInterface);
+		TestDidumsInterface impl = Didums.getService(TestDidumsInterface.class);
+		Assert.assertTrue("Should be an instanceof TestInterface", impl instanceof TestDidumsInterface);
+	}
+
+	@Test
+	public void testImplementationExistsAndQaulifier() {
+		// Should not exist
+		Assert.assertFalse("No implementation should exist for qualifier", Didums.hasService(TestDidumsInterface.class, QUALIFIER));
+		// Setup property
+		final String key = PREFIX + TestDidumsInterface.class.getName() + "." + QUALIFIER;
+		Config.getInstance().setProperty(key, TestDidumsInterfaceImpl2.class.getName());
+		// Should exist
+		Assert.assertTrue("An implementation with qualifier should exist", Didums.hasService(TestDidumsInterface.class, QUALIFIER));
+	}
+
+	@Test(expected = FactoryException.class)
+	public void testNewInstanceNoImplQualifier() {
+		Didums.getService(TestDidumsInterface.class, QUALIFIER);
+	}
+
+	@Test
+	public void testNewInstanceWithImplQualifier() {
+		String key = PREFIX + TestDidumsInterface.class.getName() + "." + QUALIFIER;
+		Config.getInstance().setProperty(key, TestDidumsInterfaceImpl2.class.getName());
+		TestDidumsInterface impl = Didums.getService(TestDidumsInterface.class, QUALIFIER);
+		Assert.assertTrue("Should be an instanceof TestFactoryInterfaceImpl2", impl instanceof TestDidumsInterfaceImpl2);
 	}
 
 	/**
@@ -53,4 +78,27 @@ public class DidumsTest {
 	 */
 	public static final class TestDidumsInterfaceImpl implements TestDidumsInterface {
 	}
+
+	/**
+	 * A second implementation of the test interface.
+	 */
+	public static final class TestDidumsInterfaceImpl2 implements TestDidumsInterface {
+	}
+
+	/**
+	 * A test annotation for qualifier.
+	 */
+	public static final class TestAnnotatation implements Annotation {
+
+		@Override
+		public Class<? extends Annotation> annotationType() {
+			throw new UnsupportedOperationException("Not supported yet.");
+		}
+
+		@Override
+		public String toString() {
+			return "A";
+		}
+	}
+
 }
