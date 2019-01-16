@@ -5,7 +5,7 @@
 	<groupId>com.github.bordertech.didums</groupId>
 	<name>didums</name>
 	<artifactId>didums</artifactId>
-	<version>1.0.1-SNAPSHOT</version>
+	<version>1.0.2-SNAPSHOT</version>
 
 	<parent>
 		<groupId>com.github.bordertech.common</groupId>
@@ -50,7 +50,7 @@
 			<dependency>
 				<groupId>com.github.bordertech.config</groupId>
 				<artifactId>config</artifactId>
-				<version>1.0.1</version>
+				<version>1.0.2</version>
 			</dependency>
 
 			<!-- Injection interface. JSR 330 -->
