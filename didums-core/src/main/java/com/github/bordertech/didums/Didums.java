@@ -97,17 +97,18 @@ public final class Didums {
 	 * no binding.
 	 *
 	 * @param <T> the service class type
+	 * @param <U> the default service implementation type
 	 * @param service the service class
 	 * @param defaultImpl the default implementation if an implementation is not found
 	 * @param qualifiers the service qualifiers
 	 * @return the implementation for this service and qualifiers or null if none available
 	 */
-	public static <T> T getService(final Class<T> service, final Class<T> defaultImpl, final Annotation... qualifiers) {
+	public static <T, U extends T> T getService(final Class<T> service, final Class<U> defaultImpl, final Annotation... qualifiers) {
 		// Provider
 		T impl = PROVIDER.getService(service, qualifiers);
 		// Fallback to basic factory
 		if (impl == null) {
-			impl = Factory.newInstance(service, buildFactoryQualifiers(qualifiers));
+			impl = Factory.newInstance(service, defaultImpl, buildFactoryQualifiers(qualifiers));
 		}
 		return impl;
 	}
