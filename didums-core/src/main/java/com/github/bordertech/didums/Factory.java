@@ -68,7 +68,7 @@ public final class Factory {
 	 * implementation defined.
 	 *
 	 * @param <T> the contract type
-	 * @param <U> the default contract type
+	 * @param <U> the default contract implementation type
 	 * @param contract the contract to find and create new implementation
 	 * @param defaultImpl the default implementation if an implementation is not found
 	 * @param qualifiers the contract qualifiers

@@ -2,8 +2,8 @@ package com.github.bordertech.didums;
 
 import com.github.bordertech.config.Config;
 import java.lang.annotation.Annotation;
-import junit.framework.Assert;
 import org.junit.After;
+import org.junit.Assert;
 import org.junit.Test;
 
 /**
@@ -65,6 +65,12 @@ public class DidumsTest {
 		Config.getInstance().setProperty(key, TestDidumsInterfaceImpl2.class.getName());
 		TestDidumsInterface impl = Didums.getService(TestDidumsInterface.class, QUALIFIER);
 		Assert.assertTrue("Should be an instanceof TestFactoryInterfaceImpl2", impl instanceof TestDidumsInterfaceImpl2);
+	}
+
+	@Test
+	public void testNewInstanceDefaultImpl() {
+		TestDidumsInterface impl = Didums.getService(TestDidumsInterface.class, TestDidumsInterfaceImpl.class);
+		Assert.assertTrue("Should be an instanceof the default impl", impl instanceof TestDidumsInterfaceImpl);
 	}
 
 	/**
