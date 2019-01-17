@@ -1,8 +1,8 @@
 package com.github.bordertech.didums;
 
 import com.github.bordertech.config.Config;
-import junit.framework.Assert;
 import org.junit.After;
+import org.junit.Assert;
 import org.junit.Test;
 
 /**
@@ -64,6 +64,12 @@ public class FactoryTest {
 		Config.getInstance().setProperty(key, TestFactoryInterfaceImpl2.class.getName());
 		TestFactoryInterface impl = Factory.newInstance(TestFactoryInterface.class, QUALIFIER);
 		Assert.assertTrue("Should be an instanceof TestFactoryInterfaceImpl2", impl instanceof TestFactoryInterfaceImpl2);
+	}
+
+	@Test
+	public void testNewInstanceDefaultImpl() {
+		TestFactoryInterface impl = Factory.newInstance(TestFactoryInterface.class, TestFactoryInterfaceImpl.class);
+		Assert.assertTrue("Should be an instanceof the defualt impl", impl instanceof TestFactoryInterfaceImpl);
 	}
 
 	/**
