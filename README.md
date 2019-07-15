@@ -3,8 +3,10 @@ Dependency Injection based on JSR330.
 
 ## Status
 [![Build Status](https://travis-ci.com/BorderTech/didums.svg?branch=master)](https://travis-ci.com/BorderTech/didums)
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=bordertech-didums&metric=alert_status)](https://sonarcloud.io/dashboard?id=bordertech-didums)
+[![Reliability Rating](https://sonarcloud.io/api/project_badges/measure?project=bordertech-didums&metric=reliability_rating)](https://sonarcloud.io/dashboard?id=bordertech-didums)
+[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=bordertech-didums&metric=coverage)](https://sonarcloud.io/dashboard?id=bordertech-didums)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/60fbedbceee84805a244d89182a41310)](https://www.codacy.com/app/BorderTech/didums?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=BorderTech/didums&amp;utm_campaign=Badge_Grade)
-[![Codacy Badge](https://api.codacy.com/project/badge/Coverage/60fbedbceee84805a244d89182a41310)](https://www.codacy.com/app/BorderTech/didums?utm_source=github.com&utm_medium=referral&utm_content=BorderTech/didums&utm_campaign=Badge_Coverage)
 [![Javadocs](https://www.javadoc.io/badge/com.github.bordertech.didums/didums-core.svg)](https://www.javadoc.io/doc/com.github.bordertech.didums/didums-core)
 [![Maven Central](https://img.shields.io/maven-central/v/com.github.bordertech.didums/didums-core.svg?label=Maven%20Central)](https://search.maven.org/search?q=g:%22com.github.bordertech.didums%22%20AND%20a:%22didums-core%22)
 
