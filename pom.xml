@@ -5,7 +5,7 @@
 	<groupId>com.github.bordertech.didums</groupId>
 	<name>didums</name>
 	<artifactId>didums</artifactId>
-	<version>1.0.4-SNAPSHOT</version>
+	<version>1.0.4</version>
 
 	<parent>
 		<groupId>com.github.bordertech.common</groupId>
@@ -30,7 +30,7 @@
 		<url>https://github.com/bordertech/didums</url>
 		<connection>scm:git:https://github.com/bordertech/didums.git</connection>
 		<developerConnection>scm:git:https://github.com/bordertech/didums.git</developerConnection>
-		<tag>didums-1.0.0</tag>
+		<tag>didums-1.0.4</tag>
 	</scm>
 
 	<issueManagement>
