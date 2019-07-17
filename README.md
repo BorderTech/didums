@@ -25,9 +25,7 @@ Didums is a facade for Dependency Injection frameworks that implement [JSR330](h
 
 ## Why use Didums
 
-Dependency Injection frameworks (e.g. Guice, Weld, HK2) have existed for years with a variety of APIs for configuring and injecting.
-
-Didums serves as a simple facade or abstraction for these DI frameworks allowing the end user to plug in the desired DI framework at deployment time.
+Dependency Injection frameworks (e.g. Guice, Weld, HK2) have existed for years with a variety of APIs for configuring and injecting. Didums serves as a simple facade or abstraction for these DI frameworks allowing the end user to plug in the desired DI framework at deployment time.
 
 Even if full blown Dependency Injection is not needed, Didums provides a flexible Factory pattern for binding implementations to interfaces.
 
@@ -69,13 +67,13 @@ Use Didums to create the instance of `Foo`:
   Foo foo = Didums.getService(Foo.class);
 ```
 
-The runtime implementation can be set or overridden via [Factory Binding](#factory-binding) or [Didums Binding](#didums-binding).
-
-As the default implementation is already available, it can be provided on the `getService` method:
+However, as the default implementation is already available, it can be provided on the `getService` method:
 
 ```
   Foo foo = Didums.getService(Foo.class, FooImpl.class);
 ```
+
+The runtime implementation can be set or overridden via [Factory Binding](#factory-binding) or [Didums Binding](#didums-binding).
 
 ### Factory Binding
 
