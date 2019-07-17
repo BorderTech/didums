@@ -6,32 +6,24 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Dependency Injector Helper.
+ * Didums is a facade for Dependency Injection (JSR330) frameworks.
  * <p>
- * Didums makes use of the jsr330 annotations and requires a provider like HK2 or Guice to provide the injection
- * functionality. A {@link DidumsProvider} is the interface between the Didums API and the Provider's API.
+ * Didums makes use of the JSR330 annotations and requires a provider like HK2 or Guice to provide the injection
+ * functionality. If no provider is specified then Didums falls back to basic {@link Factory} functionality.
  * </p>
  * <p>
- * Set the {@link DidumsProvider} via the factory property:-
+ * Implementations of {@link DidumsProvider} are the bridge between the Didums API and the Provider's DI functionality.
  * </p>
- * <pre>
- * bordertech.factory.impl.com.github.bordertech.didums.DidumsProvider=my.didums.DidumsProviderImpl
- * </pre>
  * <p>
- * The initial bindings can be setup by implementing {@link DidumsBinder} via the factory property.
+ * The initial bindings for an application can be setup by implementing {@link DidumsBinder}.
  * </p>
- * <pre>
- * bordertech.factory.impl.com.github.bordertech.didums.DidumsBinder=my.didums.DidumsBinder1
- * bordertech.factory.impl.com.github.bordertech.didums.DidumsBinder+=my.didums.DidumsBinder2
- * </pre>
- * <p>
- * Note: Multiple DidumsBinder implementations can be set.
- * </p>
- *
- * @see Config
- * @see Factory
  *
  * @author Jonathan Austin
+ * @see Config
+ * @see DidumsProvider
+ * @see DidumsBinder
+ * @see Factory
+ *
  * @since 1.0.0
  */
 public final class Didums {

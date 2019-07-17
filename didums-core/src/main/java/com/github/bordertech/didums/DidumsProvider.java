@@ -1,10 +1,26 @@
 package com.github.bordertech.didums;
 
+import com.github.bordertech.config.Config;
 import java.io.Serializable;
 import java.lang.annotation.Annotation;
 
 /**
  * Dependency Injection Provider.
+ * <p>
+ * Implementors of this interface provide the bridge between the Didums API and the functionality of the backing
+ * Dependency Injection framework.
+ * </p>
+ * <p>
+ * Didums checks the following factory property to determine the provider implementation to use:-
+ * </p>
+ *
+ * <pre>
+ * bordertech.factory.impl.com.github.bordertech.didums.DidumsProvider=my.didums.DidumsProviderImpl
+ * </pre>
+ *
+ *
+ * @see Didums
+ * @see Config
  *
  * @author Jonathan Austin
  * @since 1.0.0
