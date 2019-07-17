@@ -15,13 +15,13 @@
 - [What is Didums](#what-is-didums)
 - [Why use Didums](#why-use-didums)
 - [Getting started](#getting-started)
-- [Features](#features)
+- [Configuration](#configuration)
 - [Links](#links)
 - [Contributing](#contributing)
 
 ## What is Didums
 
-Didums is a facade for [JSR330](http://javax-inject.github.io/javax-inject/) Dependency Injection frameworks.
+Didums is a facade for Dependency Injection frameworks that implement [JSR330](http://javax-inject.github.io/javax-inject/).
 
 ## Why use Didums
 
@@ -33,7 +33,7 @@ Even if full blown Dependency Injection is not needed, Didums provides a flexibl
 
 ## Getting started
 
-Add didums-core dependency:
+Add `didums-core` dependency:
 
 ``` xml
 <project>
@@ -69,118 +69,23 @@ Use Didums to create the instance of `Foo`:
   Foo foo = Didums.getService(Foo.class);
 ```
 
+The runtime implementation can be set or overridden via [Factory Binding](#factory-binding) or [Didums Binding](#didums-binding).
+
 As the default implementation is already available, it can be provided on the `getService` method:
 
 ```
   Foo foo = Didums.getService(Foo.class, FooImpl.class);
 ```
 
-The runtime implementation can be set or overridden via [Factory Binding](#factory-binding) or [Didums Binding](#didums-binding).
-
 ### Factory Binding
 
-Didums can be used without a DI backing framework as it provides a fallback Factory pattern. However, the only JSR330 annotation supported is `Singleton`.
+Didums can be used without a DI backing framework as it provides a fallback Factory pattern. The only JSR330 annotation supported is `Singleton`.
 
 Didums will check for a runtime property to get the required implementation class name.
 
-The property used is the prefix "bordertech.factory.impl" combined with the interface class name:
+The property used is the prefix `bordertech.factory.impl` combined with the interface class name:
 
 ```
-bordertech.factory.impl.my.example.Foo=my.example.FooImpl
-```
-
-Refer to [Config](https://github.com/BorderTech/java-config) on how to set runtime properties.
-
-### Didums Binding
-
-Using a backing DI Framework via a provider allows the full range of JSR330 annotations to be used.
-
-Add a DI provider dependency:
-
-``` xml
-<project>
-  ....
-  <dependency>
-    <groupId>com.github.bordertech.didums</groupId>
-    <artifactId>didums-hk2</artifactId>
-    <version>1.0.4</version>
-  </dependency>
-  ....
-</project>
-```
-
-Create a DidumsBinder to bind implementations to interfaces:
-
-``` java
-package my.example;
-public class MyDidumsBinder implements DidumsBinder {
-
-  @Override
-  public void configBindings(final DidumsProvider provider) {
-    provider.bind(Foo.class, FooImpl.class, false);
-    provider.bind(AnotherFoo.class, AnotherFooImpl.class, false);
-  }
-
-}
-```
-
-Set the DidumsBinder runtime property:
-
-``` java
-bordertech.factory.impl.com.github.bordertech.didums.DidumsBinder=my.example.MyDidumsBinder
-```
-
-If an interface has not been bound via a DidumsBinder, then Didums will fallback to the Factory pattern binding.
-
-## Features
-
-### DidumsProvider
-
-Implementations of the `DidumsProvider` interface are the bridge between the Didums API and the backing DI framework.
-
-If creating a custom provider, set the `DidumsProvider` implementation via the factory property:
-
-```
-bordertech.factory.impl.com.github.bordertech.didums.DidumsProvider=my.didums.DidumsProviderImpl
-```
-
-### DidumsBinder
-
-When a backing DI provider is going to be used, a project's bindings can be setup by creating an implementation of the `DidumsBinder` interface:
-
-``` java
-package my.example;
-public class MyDidumsBinder implements DidumsBinder {
-
-  @Override
-  public void configBindings(final DidumsProvider provider) {
-    provider.bind(Foo.class, FooImpl.class, false);
-    provider.bind(AnotherFoo.class, AnotherFooImpl.class, false);
-  }
-
-}
-```
-
-Set the DidumsBinder factory property:
-
-```
-bordertech.factory.impl.com.github.bordertech.didums.DidumsBinder=my.example.MyDidumsBinder
-bordertech.factory.impl.com.github.bordertech.didums.DidumsBinder+=my.example.AnotherDidumsBinder
-```
-
-As shown in the example above, multiple DidumsBinder implementations can be set.
-
-Projects can also use the Binding method supported by its selected DI framework.
-
-### Factory Binding Fallback
-
-Didums provides a fallback Factory pattern to bind Implementations to an Interface.
-
-If no backing DI framework is being used or no binding has been set for an Interface, Didums will check for a runtime property to get the implementation class name.
-
-The property used is the prefix "bordertech.factory.impl" combined with the interface class name.
-
-``` java
 bordertech.factory.impl.my.example.Foo=my.example.FooImpl
 ```
 
@@ -196,15 +101,81 @@ The qualifiers are concatenated to the parameter key lookup with a "." separator
 bordertech.factory.impl.my.example.util.Foo.use.another=my.example.FooAnotherImpl
 ```
 
-If the default implementation for an interface is already known, then it can be provided as the default implementation on `Didums.getService` method and no configuration property is required.
+Refer to [Config](https://github.com/BorderTech/java-config) on how to set runtime properties.
 
-``` java
-  Foo foo = Didums.getService(Foo.class, FooImpl.class);
+### Didums Binding
+
+Using a backing DI Framework via a provider allows the full range of JSR330 annotations to be used.
+
+Add a `DI Provider` dependency:
+
+``` xml
+<project>
+  ....
+  <dependency>
+    <groupId>com.github.bordertech.didums</groupId>
+    <artifactId>didums-hk2</artifactId>
+    <version>1.0.4</version>
+  </dependency>
+  ....
+</project>
 ```
 
-A configuration property can still be used to override the default.
+When using a DI provider, a `DidumsBinder` implementation can be used to bind interfaces and implementations:
+
+``` java
+package my.example;
+public class MyDidumsBinder implements DidumsBinder {
+
+  @Override
+  public void configBindings(final DidumsProvider provider) {
+    provider.bind(Foo.class, FooImpl.class, false);
+    provider.bind(AnotherFoo.class, AnotherFooImpl.class, false);
+  }
+
+}
+```
+
+Set the `DidumsBinder` factory property:
+
+```
+bordertech.factory.impl.com.github.bordertech.didums.DidumsBinder=my.example.MyDidumsBinder
+bordertech.factory.impl.com.github.bordertech.didums.DidumsBinder+=my.example.AnotherDidumsBinder
+```
+
+As shown in the example above, multiple `DidumsBinder` implementations can be set.
+
+Projects can also use the Binding method supported by its selected DI framework.
+
+If an interface has not been bound via a `DidumsBinder`, then Didums will fallback to the Factory pattern binding.
 
 Refer to [Config](https://github.com/BorderTech/java-config) on how to set runtime properties.
+
+## Configuration
+
+### DidumsProvider
+
+Implementations of the `DidumsProvider` interface are the bridge between the Didums API and the backing DI framework.
+
+If creating a custom provider, set the `DidumsProvider` implementation via the factory property:
+
+```
+bordertech.factory.impl.com.github.bordertech.didums.DidumsProvider=my.didums.DidumsProviderImpl
+```
+
+Or add a predefined `DI Provider` dependency:
+
+``` xml
+<project>
+  ....
+  <dependency>
+    <groupId>com.github.bordertech.didums</groupId>
+    <artifactId>didums-hk2</artifactId>
+    <version>1.0.4</version>
+  </dependency>
+  ....
+</project>
+```
 
 ## Links
 
@@ -232,7 +203,7 @@ Refer to [Config](https://github.com/BorderTech/java-config) on how to set runti
 
 ### DI and Related JSRs
 
-Dependency Injection is defined via JSR330. However there are other JSRs that expand JSR330 and can cause some confusion.
+Dependency Injection is defined via [JSR330](http://javax-inject.github.io/javax-inject/). However there are other JSRs that expand JSR330 and can cause some confusion.
 
 How are JSR330, JSR299, JSR250, JSR365, JSR346 related:
 
@@ -244,7 +215,7 @@ How are JSR330, JSR299, JSR250, JSR365, JSR346 related:
 
 ### Using Didums and Jersey
 
-If your project uses Jersey, then using Didums makes it even easier to define your bindings as Jersey uses HK2.
+If your project uses [Jersey](https://jersey.github.io/), then using Didums makes it even easier to define your bindings as Jersey uses [HK2](https://javaee.github.io/hk2).
 
 - http://appsdeveloperblog.com/dependency-injection-hk2-jersey-jax-rs/
 - https://riptutorial.com/jersey/example/23632/basic-dependency-injection-using-jersey-s-hk2
