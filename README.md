@@ -87,18 +87,6 @@ The property used is the prefix `bordertech.factory.impl` combined with the inte
 bordertech.factory.impl.my.example.Foo=my.example.FooImpl
 ```
 
-Qualifiers can also be used to specify the implementation class:
-
-``` java
-  Foo foo = Didums.getService(Foo.class, "use", "another");
-```
-
-The qualifiers are concatenated to the parameter key lookup with a "." separator between the qualifiers:
-
-```
-bordertech.factory.impl.my.example.util.Foo.use.another=my.example.FooAnotherImpl
-```
-
 Refer to [Config](https://github.com/BorderTech/java-config) on how to set runtime properties.
 
 ### Didums Binding
