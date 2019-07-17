@@ -5,7 +5,8 @@ import java.lang.annotation.Annotation;
 /**
  * Default Provider.
  * <p>
- * The default implementation provides no DI functionality.
+ * The default implementation provides no DI functionality. Didums will fall back to the basic {@link Factory}
+ * functionality.
  * </p>
  *
  * @author Jonathan Austin

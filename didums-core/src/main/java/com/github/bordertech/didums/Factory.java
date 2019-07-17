@@ -14,19 +14,41 @@ import org.apache.commons.logging.LogFactory;
  * Factory for contract implementations.
  * <p>
  * Provides a generic mechanism for obtaining objects which implement a requested interface. A new object will be
- * created each time the newInstance method is called.</p>
+ * created each time the <code>newInstance</code> method is called unless the implementing class is annotated with
+ * {@link Singleton} then only one instance is created.</p>
  *
  * <p>
- * The runtime {@link Config} class is used to look up the implementing class, based on the requested interface's
- * classname. This is done by prefixing the full interface name with "bordertech.factory.impl.". For example, to specify
- * that the my.example.FooImpl implements my.example.util.Foo interface, the following should be added to the
- * configuration:
+ * The runtime {@link Config} class is used to look up the implementing class, based on the requested interface
+ * classname. This is done by prefixing the full interface name with "bordertech.factory.impl.".
  * </p>
- * <pre>
- * bordertech.factory.impl.my.example.util.Foo=my.example.FooImpl
- * </pre>
  * <p>
- * Factory also supports the Singleton annotation to make sure only one instance of a requested class is created.
+ * For example, to specify the implementation for interface <code>my.example.Foo</code> is
+ * <code>my.example.FooImpl</code> the following should be added to the configuration:
+ * </p>
+ *
+ * <pre>
+ * bordertech.factory.impl.my.example.Foo=my.example.FooImpl
+ * </pre>
+ *
+ * <p>
+ * Qualifiers can also be used to specify the implementation class. The qualifiers are concatenated to the parameter key
+ * lookup with a "." separator between the qualifiers.
+ * </p>
+ *
+ * <p>
+ * For example, to qualify the implementation for interface <code>my.example.Foo</code> is
+ * <code>my.example.FooAnotherImpl</code> when qualifiers of "use" and "another" are used the following should be added
+ * to the configuration:
+ * </p>
+ *
+ * <pre>
+ * bordertech.factory.impl.my.example.util.Foo.use.another=my.example.FooAnotherImpl
+ * </pre>
+ *
+ * <p>
+ * If the default implementation for an interface is already known, then it can be provided as the default
+ * implementation when calling <code>newInstance</code> and no configuration property is required. A configuration
+ * property can still be used to override the default.
  * </p>
  *
  * @see Config
@@ -42,6 +64,8 @@ public final class Factory {
 
 	private static final String PREFIX = "bordertech.factory.impl.";
 
+	private static final String QUALIFIER_SEPERATOR = ".";
+
 	private static final Map<String, Object> SINGLETONS = new HashMap<>();
 
 	/**
@@ -52,11 +76,14 @@ public final class Factory {
 
 	/**
 	 * Create an instance of the implementation defined for the contract.
+	 * <p>
+	 * If the implementing class has a {@link Singleton} annotation then only one instance is created.
+	 * </p>
 	 *
 	 * @param <T> the contract type
 	 * @param contract the contract to find and create new implementation
 	 * @param qualifiers the contract qualifiers
-	 * @return a new implementation of the contract, or null if no implementation defined
+	 * @return an implementation of the contract, or null if no implementation defined
 	 */
 	public static <T> T newInstance(final Class<T> contract, final String... qualifiers) {
 		String suffix = getContractSuffixKey(contract, qualifiers);
@@ -66,13 +93,16 @@ public final class Factory {
 	/**
 	 * Create an instance of the implementation defined for the contract, or the default implementation if no
 	 * implementation defined.
+	 * <p>
+	 * If the implementing class has a {@link Singleton} annotation then only one instance is created.
+	 * </p>
 	 *
 	 * @param <T> the contract type
 	 * @param <U> the default contract implementation type
 	 * @param contract the contract to find and create new implementation
 	 * @param defaultImpl the default implementation if an implementation is not found
 	 * @param qualifiers the contract qualifiers
-	 * @return a new implementation of the contract or the default implementation
+	 * @return an implementation of the contract or the default implementation
 	 */
 	public static <T, U extends T> T newInstance(final Class<T> contract, final Class<U> defaultImpl, final String... qualifiers) {
 		String suffix = getContractSuffixKey(contract, qualifiers);
@@ -81,6 +111,9 @@ public final class Factory {
 
 	/**
 	 * Create an instance of the implementation for the parameter key suffix.
+	 * <p>
+	 * If the implementing class has a {@link Singleton} annotation then only one instance is created.
+	 * </p>
 	 *
 	 * @param <T> the contract type
 	 * @param keySuffix the parameter key suffix for the implementation class name
@@ -93,6 +126,9 @@ public final class Factory {
 	/**
 	 * Create an instance of the implementation for the parameter key suffix, or the default implementation if no
 	 * implementation defined.
+	 * <p>
+	 * If the implementing class has a {@link Singleton} annotation then only one instance is created.
+	 * </p>
 	 *
 	 * @param <T> the contract type
 	 * @param keySuffix the parameter key suffix for the implementation class name
@@ -117,6 +153,9 @@ public final class Factory {
 
 	/**
 	 * Create instances of all defined implementations of the contract.
+	 * <p>
+	 * If the implementing class has a {@link Singleton} annotation then only one instance is created.
+	 * </p>
 	 *
 	 * @param <T> the contract type
 	 * @param contract the contract to find and create new implementations
@@ -260,7 +299,7 @@ public final class Factory {
 		StringBuilder suffix = new StringBuilder(contract.getName());
 		for (String qualifier : qualifiers) {
 			if (!StringUtils.isEmpty(qualifier)) {
-				suffix.append(".").append(qualifier);
+				suffix.append(QUALIFIER_SEPERATOR).append(qualifier);
 			}
 		}
 		return suffix.toString();

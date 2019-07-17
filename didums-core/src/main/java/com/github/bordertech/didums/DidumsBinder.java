@@ -1,5 +1,6 @@
 package com.github.bordertech.didums;
 
+import com.github.bordertech.config.Config;
 import java.io.Serializable;
 
 /**
@@ -12,10 +13,14 @@ import java.io.Serializable;
  * bordertech.factory.impl.com.github.bordertech.didums.DidumsBinder+=my.didums.DidumsBinder2
  * </pre>
  * <p>
- * Note: Multiple DidumsBinder implementations can be set.
+ * As the example above shows, multiple <code>DidumsBinder</code> implementations can be set.
  * </p>
  *
  * @author Jonathan Austin
+ *
+ * @see Config
+ * @see Didums
+ *
  * @since 1.0.0
  */
 public interface DidumsBinder extends Serializable {
