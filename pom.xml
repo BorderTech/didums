@@ -39,8 +39,8 @@
 	</issueManagement>
 
 	<ciManagement>
-		<system>Travis CI</system>
-		<url>https://travis-ci.com/BorderTech/didums</url>
+		<system>Github Actions</system>
+		<url>https://github.com/BorderTech/didums/actions</url>
 	</ciManagement>
 
 	<dependencyManagement>

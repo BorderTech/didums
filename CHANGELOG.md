@@ -3,6 +3,7 @@
 ## Release in-progress
 
 * Latest qa-parent
+* Switch from travis-ci to GitHub Actions #23
 
 ## 1.0.4
 
