@@ -1,7 +1,6 @@
 package com.github.bordertech.didums;
 
 import com.github.bordertech.config.Config;
-import java.io.Serializable;
 import java.lang.annotation.Annotation;
 
 /**
@@ -25,7 +24,7 @@ import java.lang.annotation.Annotation;
  * @author Jonathan Austin
  * @since 1.0.0
  */
-public interface DidumsProvider extends Serializable {
+public interface DidumsProvider {
 
 	/**
 	 * Retrieve the implementation for this service and qualifiers.

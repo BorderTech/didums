@@ -2,7 +2,7 @@
 
 ## Status
 
-[![Build Status](https://travis-ci.com/BorderTech/didums.svg?branch=master)](https://travis-ci.com/BorderTech/didums)
+[![Build Status](https://github.com/BorderTech/didums/actions/workflows/github-actions-build.yml/badge.svg)](https://github.com/BorderTech/didums/actions/workflows/github-actions-build.yml)
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=bordertech-didums&metric=alert_status)](https://sonarcloud.io/dashboard?id=bordertech-didums)
 [![Reliability Rating](https://sonarcloud.io/api/project_badges/measure?project=bordertech-didums&metric=reliability_rating)](https://sonarcloud.io/dashboard?id=bordertech-didums)
 [![Coverage](https://sonarcloud.io/api/project_badges/measure?project=bordertech-didums&metric=coverage)](https://sonarcloud.io/dashboard?id=bordertech-didums)
@@ -170,7 +170,7 @@ Or add a predefined `DI Provider` dependency:
 - [Weld](http://weld.cdi-spec.org)
 - [OpenWebBeans](http://openwebbeans.apache.org)
 - [Guice](https://github.com/google/guice)
-- [HK2](https://javaee.github.io/hk2)
+- [HK2](https://eclipse-ee4j.github.io/glassfish-hk2)
 - [Commons-inject](https://commons.apache.org/sandbox/commons-inject)
 - [Dagger](https://github.com/google/dagger)
 - [Spring](https://docs.spring.io/spring/docs/4.3.12.RELEASE/spring-framework-reference/htmlsingle/#overview-dependency-injection)
@@ -193,15 +193,27 @@ Dependency Injection is defined via [JSR330](http://javax-inject.github.io/javax
 
 How are JSR330, JSR299, JSR250, JSR365, JSR346 related:
 
+- https://jakarta.ee/specifications/dependency-injection/
+- https://blogs.oracle.com/javamagazine/post/java-jakarta-cdi-interceptor-qualifier-producer
 - http://www.adam-bien.com/roller/abien/entry/what_is_the_relation_between
 - https://dzone.com/articles/what-relation-betwe-there
 - https://dzone.com/articles/jsr-365-update-digging-into-cdi-20
 - https://www.javacodegeeks.com/2017/03/jsr-365-update-digging-cdi-2-0.html
 - https://en.wikipedia.org/wiki/JSR_250
 
+### HK2 and Jakarta EE4J Initiative
+
+HK2 has been taken over by the eclipse [EE4J initiative](https://eclipse-ee4j.github.io/glassfish-hk2) and is the implementation of the [Jakarta Dependency Injection](https://jakarta.ee/specifications/dependency-injection).
+
+The new Dependency Injection API provided by Jakarta has renamed the `javax.inject` package to `jakarta.inject`.
+
+Like HK2, Didums was originally created to help use frameworks that implemented the JSR330 spec.
+
+Didums will continue to use the V1 `javax.inject` package name and consider changing to the V2 `jakarta.inject` package name in the future.
+
 ### Using Didums and Jersey
 
-If your project uses [Jersey](https://jersey.github.io/), then using Didums makes it even easier to define your bindings as Jersey uses [HK2](https://javaee.github.io/hk2).
+If your project uses [Jersey](https://jersey.github.io/), then using Didums makes it even easier to define your bindings as Jersey uses [HK2](https://eclipse-ee4j.github.io/glassfish-hk2).
 
 - http://appsdeveloperblog.com/dependency-injection-hk2-jersey-jax-rs/
 - https://riptutorial.com/jersey/example/23632/basic-dependency-injection-using-jersey-s-hk2

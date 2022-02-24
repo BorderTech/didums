@@ -1,7 +1,6 @@
 package com.github.bordertech.didums;
 
 import com.github.bordertech.config.Config;
-import java.io.Serializable;
 
 /**
  * Didums service implementation binding.
@@ -23,7 +22,7 @@ import java.io.Serializable;
  *
  * @since 1.0.0
  */
-public interface DidumsBinder extends Serializable {
+public interface DidumsBinder {
 
 	/**
 	 * Configure the bindings.
