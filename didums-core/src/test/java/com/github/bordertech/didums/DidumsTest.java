@@ -21,6 +21,11 @@ public class DidumsTest {
 	}
 
 	@Test
+	public void testDefaultProvider() {
+		Assert.assertTrue("Invalid defalt provider implementation", Didums.getProvider() instanceof DefaultDidumsProvider);
+	}
+
+	@Test
 	public void testImplementationExists() {
 		// Should not exist
 		Assert.assertFalse("No implementation should exist", Didums.hasService(TestDidumsInterface.class));

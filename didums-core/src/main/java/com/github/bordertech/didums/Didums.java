@@ -48,6 +48,13 @@ public final class Didums {
 	}
 
 	/**
+	 * @return the backing didums provider
+	 */
+	public static DidumsProvider getProvider() {
+		return PROVIDER;
+	}
+
+	/**
 	 * Check if an implementation is available for this service and qualifiers.
 	 *
 	 * @param <T> the service class type

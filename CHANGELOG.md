@@ -5,6 +5,7 @@
 * Latest qa-parent
 * Switch from travis-ci to GitHub Actions #23
 * Update HK2 dependency to the latest version that supports javax.inject API #24
+* DidumsProvider and DidumsBinder do not need to be Serializable #25
 
 ## 1.0.4
 
