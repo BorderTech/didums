@@ -39,7 +39,7 @@ Add `didums-core` dependency:
   <dependency>
     <groupId>com.github.bordertech.didums</groupId>
     <artifactId>didums-core</artifactId>
-    <version>1.0.4</version>
+    <version>1.0.5</version>
   </dependency>
   ....
 </project>
