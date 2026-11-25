@@ -2,6 +2,10 @@
 
 ## Release in-progress
 
+* Updated the following dependencies:
+  * com.github.bordertech.common:qa-parent from 1.0.19 to 1.0.24
+  * com.github.bordertech.config:config from 1.0.8 to 1.0.9
+
 ## 1.0.5
 
 * Latest qa-parent

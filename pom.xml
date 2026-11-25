@@ -10,7 +10,8 @@
 	<parent>
 		<groupId>com.github.bordertech.common</groupId>
 		<artifactId>qa-parent</artifactId>
-		<version>1.0.19</version>
+		<version>1.0.24</version>
+		<relativePath />
 	</parent>
 
 	<packaging>pom</packaging>
@@ -50,7 +51,7 @@
 			<dependency>
 				<groupId>com.github.bordertech.config</groupId>
 				<artifactId>config</artifactId>
-				<version>1.0.8</version>
+				<version>1.0.9</version>
 			</dependency>
 
 			<!-- Injection interface. JSR 330 -->
