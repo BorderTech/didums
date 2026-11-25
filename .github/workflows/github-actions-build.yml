@@ -33,13 +33,29 @@ jobs:
         java-version: '17'
         distribution: 'temurin'
 
+# Scan direct & transitive dependencies for CVEs
+    - name: Run Trivy vulnerability scanner
+      uses: aquasecurity/trivy-action@v0.36.0
+      with:
+        scan-type: 'fs'
+        scan-ref: '.'
+        scanners: 'vuln'
+        skip-dirs: '**/target'
+        format: 'sarif'
+        output: 'trivy-results.sarif'
+
     - name: SonarCloud Scan
       run: |
         if ["$SONAR_TOKEN" == ""]; then
           echo "Sonar secure variables NOT available"
         else
           echo "Sonar secure variables ARE available"
-          mvn -B org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey="bordertech-didums" -Dsonar.organization="bordertech-github" -Dsonar.host.url="https://sonarcloud.io" -Dsonar.qualitygate.wait=true
+          mvn -B org.sonarsource.scanner.maven:sonar-maven-plugin:sonar \
+            -Dsonar.projectKey="bordertech-didums" \
+            -Dsonar.organization="bordertech-github" \
+            -Dsonar.host.url="https://sonarcloud.io" \
+            -Dsonar.qualitygate.wait=true \
+            -Dsonar.sarifReportPaths=trivy-results.sarif
         fi
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
