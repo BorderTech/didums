@@ -29,17 +29,23 @@ jobs:
         java-version: '17'
         distribution: 'temurin'
 
-# Scan direct & transitive dependencies for CVEs
+    # Generate SBOM
+    - name: Generate SBOM
+      run: >
+        mvn org.cyclonedx:cyclonedx-maven-plugin:2.9.1:makeAggregateBom
+        -DoutputFormat=xml
+        -DoutputName=project-sbom
+
+    # Scan SBOM
     - name: Run Trivy vulnerability scanner
       uses: aquasecurity/trivy-action@v0.36.0 # NOSONAR
       with:
-        scan-type: 'fs'
-        scan-ref: '.'
-        scanners: 'vuln'
-        skip-dirs: '**/target'
+        scan-type: 'sbom'
+        scan-ref: 'target/project-sbom.xml'
         format: 'sarif'
         output: 'trivy-results.sarif'
 
+    # Sonar Scan
     - name: SonarCloud Scan
       run: |
         if ["$SONAR_TOKEN" == ""]; then
@@ -51,7 +57,7 @@ jobs:
             -Dsonar.organization="bordertech-github" \
             -Dsonar.host.url="https://sonarcloud.io" \
             -Dsonar.qualitygate.wait=true \
-            -Dsonar.sarifReportPaths=trivy-results.sarif
+            -Dsonar.sarifReportPaths="trivy-results.sarif"
         fi
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
