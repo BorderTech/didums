@@ -44,12 +44,13 @@ jobs:
         overwrite: true
         retention-days: 7
 
-    # Scan SBOM
+    # Scan Project for vulnernabilities (Scanning the SBOM with trivy  does not play nice with sonarcloud)
     - name: Run Trivy vulnerability scanner
       uses: aquasecurity/trivy-action@v0.36.0 # NOSONAR
       with:
-        scan-type: 'sbom'
-        scan-ref: 'target/project-sbom.json'
+        scan-type: 'fs'
+        scan-ref: '.'
+        scanners: 'vuln'
         format: 'sarif'
         output: 'trivy-results.sarif'
     # Upload sarif
