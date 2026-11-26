@@ -16,13 +16,7 @@ jobs:
       with:
         java-version: '8'
         distribution: 'temurin'
-
-    - name: Cache Maven Repo
-      uses: actions/cache@v6
-      with:
-        path: ~/.m2
-        key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
-        restore-keys: ${{ runner.os }}-m2
+        cache: 'maven'
 
     - name: Build Test and Verify
       run: mvn -B -U clean install
