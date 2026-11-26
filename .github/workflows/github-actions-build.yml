@@ -35,6 +35,23 @@ jobs:
         mvn org.cyclonedx:cyclonedx-maven-plugin:2.9.1:makeAggregateBom
         -DoutputFormat=json
         -DoutputName=project-sbom
+    # Upload SBOM
+    - name: Upload SBOM as GitHub Artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: sbom-${{ github.run_number }}
+        path: target/project-sbom.json
+        retention-days: 7
+    # ZIP SBOM
+    - name: Zip SBOM files
+      run: zip -j target/sbom.zip target/project-sbom.json
+    # Upload SBOM ZIP
+    - name: Upload zipped SBOM
+      uses: actions/upload-artifact@v4
+      with:
+        name: sbom-archive-${{ github.run_number }}
+        path: target/sbom.zip
+        retention-days: 7
 
     # Scan SBOM
     - name: Run Trivy vulnerability scanner
@@ -44,6 +61,13 @@ jobs:
         scan-ref: 'target/project-sbom.json'
         format: 'sarif'
         output: 'trivy-results.sarif'
+    # Upload sarif
+    - name: Upload Trivy sarif
+      uses: actions/upload-artifact@v4
+      with:
+        name: trivy-result-${{ github.run_number }}
+        path: trivy-results.sarif
+        retention-days: 7
 
     # Sonar Scan
     - name: SonarCloud Scan
