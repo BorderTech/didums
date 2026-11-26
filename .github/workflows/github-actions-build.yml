@@ -29,18 +29,17 @@ jobs:
         java-version: '17'
         distribution: 'temurin'
 
-    # Generate SBOM
+    # Generate SBOM (default is bom.json, bom.xml)
     - name: Generate SBOM
-      run: >
-        mvn org.cyclonedx:cyclonedx-maven-plugin:2.9.3:makeAggregateBom
-        -DoutputFormat=json
-        -DoutputName=project-sbom
-    # Upload SBOM
-    - name: Upload SBOM as GitHub Artifact
+      run: mvn org.cyclonedx:cyclonedx-maven-plugin:2.9.3:makeAggregateBom
+    # Upload SBOMs
+    - name: Upload SBOMs as GitHub Artifact
       uses: actions/upload-artifact@v7
       with:
         name: sbom-${{ github.run_number }}
-        path: target/project-sbom.json
+        path: |
+          target/bom.json
+          target/bom.xml
         overwrite: true
         retention-days: 7
 
